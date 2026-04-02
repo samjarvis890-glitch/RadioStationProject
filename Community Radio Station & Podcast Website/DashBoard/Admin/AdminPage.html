@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>WaveKind FM — Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ff4d6d;
+      --primary-dark: #e63946;
+      --secondary: #6366f1;
+      --secondary-dark: #4f46e5;
+      --bg: #ffffff;
+      --bg2: #f8fafc;
+      --bg3: #f1f5f9;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --sidebar-bg: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+      --gradient-primary: linear-gradient(135deg, #ff4d6d, #e63946);
+      --gradient-secondary: linear-gradient(135deg, #6366f1, #4f46e5);
+      --premium-glow: 0 0 20px rgba(255, 77, 109, 0.2);
+      --radius-card: 20px;
+      --radius-sm: 12px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --bg2: #1e293b;
+      --bg3: #334155;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --sidebar-bg: #0f172a;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Layout */
+    .admin-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .admin-wrapper {
+      display: flex;
+      flex: 1;
+      position: relative;
+    }
+
+    /* Sidebar - full desktop nav */
+    .sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(0px);
+    }
+
+    .sidebar-header {
+      padding: 28px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .logo:hover {
+      transform: translateX(4px);
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--gradient-primary);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: white;
+      box-shadow: 0 6px 12px rgba(255, 77, 109, 0.25);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .admin-profile {
+      text-align: center;
+      padding: 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .admin-avatar {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 14px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      color: white;
+      transition: 0.2s;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .admin-avatar:hover {
+      transform: scale(1.05);
+      box-shadow: var(--premium-glow);
+    }
+
+    .admin-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .admin-role {
+      font-size: 0.7rem;
+      background: rgba(255, 77, 109, 0.12);
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 30px;
+      margin-top: 8px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .sidebar-nav {
+      padding: 24px 16px;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      transition: all 0.2s;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .nav-item i {
+      width: 26px;
+      font-size: 1.3rem;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 77, 109, 0.08);
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .nav-item.active {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: 0 6px 14px rgba(255, 77, 109, 0.3);
+    }
+
+    .sidebar-footer {
+      padding: 20px 16px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .btn-logout-sidebar {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-secondary);
+    }
+
+    .btn-logout-sidebar:hover {
+      background: var(--gradient-primary);
+      border-color: transparent;
+      color: white;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 24px 32px;
+      background: var(--bg2);
+      transition: margin-left 0.3s;
+    }
+
+    /* Topbar Modern */
+    .topbar {
+      background: var(--card);
+      border-radius: var(--radius-card);
+      padding: 12px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: var(--bg3);
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 30px;
+      font-size: 1.5rem;
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.2s;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .page-title h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-title p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .topbar-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--bg3);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1.2rem;
+      position: relative;
+    }
+
+    .topbar-icon:hover {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: 30px;
+    }
+
+    .topbar-date {
+      background: var(--bg3);
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border-radius: var(--radius-card);
+      padding: 22px;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--gradient-primary);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .stat-icon i {
+      font-size: 1.6rem;
+      color: white;
+    }
+
+    .stat-value {
+      font-size: 1.9rem;
+      font-weight: 800;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Cards */
+    .section-card {
+      background: var(--card);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section-header h3 {
+      font-weight: 700;
+      font-size: 1.3rem;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(255, 77, 109, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Data Table */
+    .data-table {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .data-table table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 14px 12px;
+      background: var(--bg3);
+      font-weight: 600;
+      font-size: 0.8rem;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .data-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .status-active {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+    }
+
+    .status-pending {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+    }
+
+    /* Schedule Item */
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      background: var(--bg3);
+      border-radius: var(--radius-sm);
+      transition: 0.2s;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .schedule-item:hover {
+      background: rgba(255, 77, 109, 0.08);
+      transform: translateX(5px);
+    }
+
+    /* Charts Grid */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .chart-card {
+      background: var(--card);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    canvas {
+      max-height: 240px;
+      width: 100%;
+    }
+
+    /* Toggle */
+    .toggle-switch {
+      width: 48px;
+      height: 26px;
+      background: var(--border);
+      border-radius: 40px;
+      cursor: pointer;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    .toggle-switch.active {
+      background: var(--primary);
+    }
+
+    .toggle-switch::after {
+      content: '';
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      transition: 0.2s;
+    }
+
+    .toggle-switch.active::after {
+      left: 23px;
+    }
+
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background: var(--bg3);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+    }
+
+    /* Footer */
+    .dashboard-footer {
+      margin-left: 280px;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      transition: margin-left 0.3s;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+        box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .main-content, .dashboard-footer {
+        margin-left: 0;
+      }
+      .mobile-menu-btn {
+        display: flex;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 16px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .topbar-left {
+        justify-content: space-between;
+      }
+      .page-title h2 {
+        font-size: 1.3rem;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .data-table {
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar-icon {
+        width: 36px;
+        height: 36px;
+      }
+      .topbar-date {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+      }
+      .stat-value {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (min-width: 600px) and (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Notifications Dropdown */
+    .notifications-dropdown {
+      position: absolute;
+      top: 70px;
+      right: 24px;
+      width: 320px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow-hover);
+      z-index: 1100;
+      display: none;
+    }
+    .notifications-dropdown.show {
+      display: block;
+    }
+    .notification-item {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .notification-item:hover {
+      background: var(--bg3);
+    }
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,77,109,0.1);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+    .donation-progress {
+      background: var(--bg3);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+<div class="admin-container">
+  <div class="admin-wrapper">
+    <!-- SIDEBAR full navbar desktop -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo" id="logoHome">
+          <div class="logo-mark"><i class="bi bi-broadcast-pin"></i></div>
+          <span class="logo-text">WaveKind FM</span>
+        </div>
+      </div>
+      <div class="admin-profile">
+        <div class="admin-avatar"><i class="bi bi-person-fill"></i></div>
+        <div class="admin-name">Sarah Johnson</div>
+        <div class="admin-role">Administrator</div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-item active" data-section="dashboard"><i class="bi bi-speedometer2"></i><span>Dashboard</span></div>
+        <div class="nav-item" data-section="users"><i class="bi bi-people"></i><span>Users</span></div>
+        <div class="nav-item" data-section="shows"><i class="bi bi-mic"></i><span>Shows</span></div>
+        <div class="nav-item" data-section="podcasts"><i class="bi bi-headphones"></i><span>Podcasts</span></div>
+        <div class="nav-item" data-section="donations"><i class="bi bi-heart"></i><span>Donations</span></div>
+        <div class="nav-item" data-section="analytics"><i class="bi bi-graph-up"></i><span>Analytics</span></div>
+        <div class="nav-item" data-section="settings"><i class="bi bi-gear"></i><span>Settings</span></div>
+      </nav>
+      <div class="sidebar-footer">
+       <a href="../../login.html"> <button class="btn-logout-sidebar" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</button></a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-btn" id="menuToggle"><i class="bi bi-list"></i></button>
+          <div class="page-title">
+            <h2 id="pageTitle">Dashboard</h2>
+            <p id="pageDesc">Admin control center · Real-time insights</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-icon" id="themeToggle"><i class="bi bi-moon-fill"></i></div>
+          <div class="topbar-icon" id="rtlToggle"><i class="bi bi-arrow-left-right"></i></div>
+          <div class="topbar-icon" id="notificationIcon"><i class="bi bi-bell"></i><span class="notification-badge">3</span></div>
+          <div class="topbar-date" id="currentDate"></div>
+        </div>
+      </div>
+      <!-- Notifications Dropdown -->
+      <div class="notifications-dropdown" id="notificationsDropdown">
+        <div class="notification-item"><div class="notification-icon"><i class="bi bi-mic"></i></div><div><h5>New Show Added</h5><p>Morning Groove went live</p></div></div>
+        <div class="notification-item"><div class="notification-icon"><i class="bi bi-person-plus"></i></div><div><h5>+12 New Users</h5><p>Registered today</p></div></div>
+        <div class="notification-item"><div class="notification-icon"><i class="bi bi-heart"></i></div><div><h5>Donation ₹2,500</h5><p>Anonymous support</p></div></div>
+      </div>
+
+      <!-- DASHBOARD SECTION -->
+      <div id="dashboardSection">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-icon"><i class="bi bi-people-fill"></i></div><div class="stat-value">8,234</div><div class="stat-label">Total Users</div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="bi bi-mic-fill"></i></div><div class="stat-value">18</div><div class="stat-label">Active Shows</div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="bi bi-headphones"></i></div><div class="stat-value">124</div><div class="stat-label">Podcast Episodes</div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="bi bi-heart-fill"></i></div><div class="stat-value">₹32,450</div><div class="stat-label">Monthly Donations</div></div>
+        </div>
+        <div class="section-card"><div class="section-header"><h3><i class="bi bi-activity"></i> Quick Stats</h3></div><div class="stats-grid" style="grid-template-columns:repeat(2,1fr); margin-bottom:0"><div class="stat-card" style="background:var(--bg3)"><div class="stat-value">1,892</div><div class="stat-label">Listeners Online</div></div><div class="stat-card" style="background:var(--bg3)"><div class="stat-value">92%</div><div class="stat-label">Engagement</div></div></div></div>
+        <div class="section-card"><div class="section-header"><h3><i class="bi bi-clock-history"></i> Recent Activity</h3></div><div class="schedule-item"><i class="bi bi-mic-fill" style="color:var(--primary);"></i><span><strong>New Show:</strong> Morning Vibes added</span><span style="margin-left:auto;">2h ago</span></div><div class="schedule-item"><i class="bi bi-person-plus-fill" style="color:var(--primary);"></i><span><strong>New User:</strong> Alex Johnson registered</span><span style="margin-left:auto;">5h ago</span></div><div class="schedule-item"><i class="bi bi-heart-fill" style="color:var(--primary);"></i><span><strong>Donation:</strong> ₹1,000 received</span><span style="margin-left:auto;">Yesterday</span></div></div>
+      </div>
+
+      <!-- USERS SECTION -->
+      <div id="usersSection" style="display:none;"><div class="section-card"><div class="section-header"><h3><i class="bi bi-people"></i> User Management</h3><button class="btn-primary" id="addUserBtn"><i class="bi bi-plus-lg"></i> Add User</button></div><div class="data-table"><table><thead><tr><th>User</th><th>Email</th><th>Role</th><th>Status</th><th></th></tr></thead><tbody><tr><td><i class="bi bi-person-circle"></i> Alex Johnson</td><td>alex@email.com</td><td>Premium</td><td><span class="status-badge status-active">Active</span></td><td><button class="btn-secondary" style="padding:4px 12px;">Edit</button></td></tr><tr><td><i class="bi bi-person-circle"></i> Sarah Williams</td><td>sarah@email.com</td><td>Free</td><td><span class="status-badge status-active">Active</span></td><td><button class="btn-secondary">Edit</button></td></tr><tr><td><i class="bi bi-person-circle"></i> Mike Thompson</td><td>mike@email.com</td><td>Premium</td><td><span class="status-badge status-active">Active</span></td><td><button class="btn-secondary">Edit</button></td></tr><tr><td><i class="bi bi-person-circle"></i> Emma Watson</td><td>emma@email.com</td><td>Free</td><td><span class="status-badge status-pending">Pending</span></td><td><button class="btn-secondary">Edit</button></td></tr></tbody></table></div></div></div>
+
+      <!-- SHOWS SECTION -->
+      <div id="showsSection" style="display:none;"><div class="section-card"><div class="section-header"><h3><i class="bi bi-mic-fill"></i> Manage Shows</h3><button class="btn-primary" id="addShowBtn"><i class="bi bi-plus-lg"></i> Add Show</button></div><div class="data-table"><table><thead><tr><th>Show Name</th><th>Host</th><th>Time Slot</th><th>Status</th><th></th></tr></thead><tbody><tr><td><i class="bi bi-sun-fill"></i> Morning Vibes</td><td>DJ Marcus</td><td>6AM - 10AM</td><td><span class="status-badge status-active">Active</span></td><td><button class="btn-secondary">Edit</button></td></tr><tr><td><i class="bi bi-chat-dots-fill"></i> Community Hour</td><td>Sarah Chen</td><td>10AM - 12PM</td><td><span class="status-badge status-active">Active</span></td><td><button class="btn-secondary">Edit</button></td></tr><tr><td><i class="bi bi-moon-stars-fill"></i> Jazz Nights</td><td>Miles Turner</td><td>8PM - 12AM</td><td><span class="status-badge status-active">Active</span></td><td><button class="btn-secondary">Edit</button></td></tr></tbody></table></div></div></div>
+
+      <!-- PODCASTS SECTION -->
+      <div id="podcastsSection" style="display:none;"><div class="section-card"><div class="section-header"><h3><i class="bi bi-headphones"></i> Podcasts</h3><button class="btn-primary" id="addPodcastBtn"><i class="bi bi-plus-lg"></i> Add Podcast</button></div><div class="data-table"><table><thead><tr><th>Podcast</th><th>Host</th><th>Episodes</th><th>Status</th></tr></thead><tbody><tr><td><i class="bi bi-cpu"></i> Tech Talk Weekly</td><td>Alex Morgan</td><td>45</td><td><span class="status-badge status-active">Published</span></td></tr><tr><td><i class="bi bi-shield-shaded"></i> True Crime Files</td><td>Jessica Wells</td><td>78</td><td><span class="status-badge status-active">Published</span></td></tr><tr><td><i class="bi bi-flower1"></i> Mindful Living</td><td>Dr. Lisa Chen</td><td>52</td><td><span class="status-badge status-active">Published</span></td></tr></tbody></table></div></div></div>
+
+      <!-- DONATIONS SECTION -->
+      <div id="donationsSection" style="display:none;"><div class="section-card"><div class="section-header"><h3><i class="bi bi-heart-fill"></i> Donations</h3><button class="btn-primary" id="newCampaignBtn"><i class="bi bi-plus-lg"></i> New Campaign</button></div><div class="donation-progress"><div style="display:flex; justify-content:space-between"><span>Monthly Goal: ₹50,000</span><span>₹32,450 raised</span></div><div style="height:8px; background:var(--border); border-radius:10px; margin:12px 0"><div style="width:65%; height:100%; background:var(--gradient-primary); border-radius:10px"></div></div><div><i class="bi bi-people"></i> 287 donors</div></div><div class="data-table"><table><thead><tr><th>Donor</th><th>Amount</th><th>Date</th></tr></thead><tbody><tr><td>Anonymous</td><td>₹2,500</td><td>Mar 15, 2025</td></tr><tr><td>Sarah Johnson</td><td>₹1,000</td><td>Mar 14, 2025</td></tr><tr><td>Mike Chen</td><td>₹500</td><td>Mar 12, 2025</td></tr></tbody></table></div></div></div>
+
+      <!-- ANALYTICS SECTION -->
+      <div id="analyticsSection" style="display:none;"><div class="charts-grid"><div class="chart-card"><h4><i class="bi bi-graph-up"></i> Weekly Listeners</h4><canvas id="listenersChart"></canvas></div><div class="chart-card"><h4><i class="bi bi-cash-stack"></i> Revenue Trend</h4><canvas id="revenueChart"></canvas></div></div><div class="section-card"><div class="stats-grid" style="margin-bottom:0"><div class="stat-card" style="background:var(--bg3)"><div class="stat-value">+23%</div><div class="stat-label">User Growth</div></div><div class="stat-card" style="background:var(--bg3)"><div class="stat-value">156K</div><div class="stat-label">Listening Hours</div></div><div class="stat-card" style="background:var(--bg3)"><div class="stat-value">89%</div><div class="stat-label">Retention</div></div><div class="stat-card" style="background:var(--bg3)"><div class="stat-value">4.8★</div><div class="stat-label">Rating</div></div></div></div></div>
+
+      <!-- SETTINGS SECTION -->
+      <div id="settingsSection" style="display:none;"><div class="section-card"><div class="section-header"><h3><i class="bi bi-gear"></i> Admin Settings</h3></div><div class="setting-item"><span><i class="bi bi-tools"></i> Maintenance Mode</span><div class="toggle-switch" id="maintenanceToggle"></div></div><div class="setting-item"><span><i class="bi bi-envelope"></i> Email Notifications</span><div class="toggle-switch active" id="emailToggle"></div></div><div class="setting-item"><span><i class="bi bi-chat-dots"></i> Auto-approve Comments</span><div class="toggle-switch active" id="commentsToggle"></div></div><button class="btn-primary" id="saveSettingsBtn" style="margin-top:20px;">Save Changes</button></div></div>
+    </main>
+  </div>
+  <footer class="dashboard-footer"><div class="footer-content"><p>© 2025 WaveKind FM · Community Radio & Podcast Network</p><p class="copyright">Preserving independent audio culture</p></div></footer>
+</div>
+
+<script>
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  if(menuToggle) {
+    menuToggle.addEventListener('click', (e) => { e.stopPropagation(); sidebar.classList.toggle('open'); });
+    document.addEventListener('click', (e) => { if(window.innerWidth <= 1024 && sidebar.classList.contains('open') && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) sidebar.classList.remove('open'); });
+  }
+
+  // Navigation
+  const sections = ['dashboard','users','shows','podcasts','donations','analytics','settings'];
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const section = item.dataset.section;
+      document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+      item.classList.add('active');
+      sections.forEach(sec => { const el = document.getElementById(`${sec}Section`); if(el) el.style.display = 'none'; });
+      document.getElementById(`${section}Section`).style.display = 'block';
+      const titles = { dashboard:'Dashboard', users:'Users', shows:'Shows', podcasts:'Podcasts', donations:'Donations', analytics:'Analytics', settings:'Settings' };
+      document.getElementById('pageTitle').innerText = titles[section];
+      if(section === 'dashboard') document.getElementById('pageDesc').innerText = 'Admin control center · Real-time insights';
+      else document.getElementById('pageDesc').innerText = `Manage ${titles[section].toLowerCase()} efficiently`;
+    });
+  });
+
+  // Toggle switches initial
+  function initToggles() { document.querySelectorAll('.toggle-switch').forEach(el => { if(el.classList.contains('active')) el.style.background = '#ff4d6d'; else el.style.background = 'var(--border)'; el.addEventListener('click', function(e) { e.stopPropagation(); this.classList.toggle('active'); this.style.background = this.classList.contains('active') ? '#ff4d6d' : 'var(--border)'; }); }); }
+  initToggles();
+
+  // Notifications dropdown
+  const notifIcon = document.getElementById('notificationIcon');
+  const notifDropdown = document.getElementById('notificationsDropdown');
+  if(notifIcon) notifIcon.addEventListener('click', (e) => { e.stopPropagation(); notifDropdown.classList.toggle('show'); });
+  document.addEventListener('click', () => { if(notifDropdown) notifDropdown.classList.remove('show'); });
+
+  // Date
+  function updateDate() { const el = document.getElementById('currentDate'); if(el) el.innerText = new Date().toLocaleDateString('en-US', { weekday:'long', month:'short', day:'numeric', year:'numeric' }); }
+  updateDate();
+
+  // Theme
+  let darkMode = localStorage.getItem('theme') === 'dark';
+  function applyTheme() { document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light'); const icon = document.querySelector('#themeToggle i'); if(icon) icon.className = darkMode ? 'bi bi-sun-fill' : 'bi bi-moon-fill'; }
+  applyTheme();
+  document.getElementById('themeToggle')?.addEventListener('click', () => { darkMode = !darkMode; localStorage.setItem('theme', darkMode ? 'dark' : 'light'); applyTheme(); });
+
+  // RTL
+  let rtlActive = localStorage.getItem('dir') === 'rtl';
+  function applyRTL() { document.documentElement.setAttribute('dir', rtlActive ? 'rtl' : 'ltr'); }
+  applyRTL();
+  document.getElementById('rtlToggle')?.addEventListener('click', () => { rtlActive = !rtlActive; localStorage.setItem('dir', rtlActive ? 'rtl' : 'ltr'); applyRTL(); });
+
+  // // Logout demo
+  // document.getElementById('logoutBtn')?.addEventListener('click', () => alert("Logged out (demo)"));
+
+  // Chart.js
+  const ctxListen = document.getElementById('listenersChart')?.getContext('2d');
+  if(ctxListen) new Chart(ctxListen, { type:'line', data:{ labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], datasets:[{ label:'Listeners', data:[1200,1900,1700,2100,2800,3200,2900], borderColor:'#ff4d6d', backgroundColor:'rgba(255,77,109,0.1)', tension:0.3, fill:true }] }, options:{ responsive:true, maintainAspectRatio:true } });
+  const ctxRev = document.getElementById('revenueChart')?.getContext('2d');
+  if(ctxRev) new Chart(ctxRev, { type:'bar', data:{ labels:['Week 1','Week 2','Week 3','Week 4'], datasets:[{ label:'Revenue (₹)', data:[8500,10200,7800,12400], backgroundColor:'#6366f1', borderRadius:8 }] }, options:{ responsive:true } });
+
+  // Buttons demo
+  document.getElementById('addUserBtn')?.addEventListener('click',()=>alert("Add User (demo)"));
+  document.getElementById('addShowBtn')?.addEventListener('click',()=>alert("Add Show (demo)"));
+  document.getElementById('addPodcastBtn')?.addEventListener('click',()=>alert("Add Podcast (demo)"));
+  document.getElementById('newCampaignBtn')?.addEventListener('click',()=>alert("New Campaign (demo)"));
+  document.getElementById('saveSettingsBtn')?.addEventListener('click',()=>alert("Settings saved (demo)"));
+  document.getElementById('logoHome')?.addEventListener('click',()=>window.location.reload());
+</script>
+</body>
+</html>

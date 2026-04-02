@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>WaveKind FM — Join the Wave | Create Account</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --primary: #ff4d6d;
+      --primary-dark: #e63946;
+      --secondary: #6366f1;
+      --secondary-dark: #4f46e5;
+      --bg: #ffffff;
+      --bg2: #f8fafc;
+      --bg3: #f1f5f9;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --nav-bg: rgba(255, 255, 255, 0.98);
+      --gradient-primary: linear-gradient(135deg, #ff4d6d, #e63946);
+      --gradient-secondary: linear-gradient(135deg, #6366f1, #4f46e5);
+      --success: #10b981;
+      --error: #ef4444;
+      --nav-height: 70px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --bg2: #1e293b;
+      --bg3: #334155;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --nav-bg: rgba(15, 23, 42, 0.96);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ==================== NAVBAR ==================== */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: var(--nav-height);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      white-space: nowrap;
+    }
+
+    /* Navigation Links - Desktop only */
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      cursor: pointer;
+      background: none;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 77, 109, 0.1);
+      color: var(--primary);
+    }
+
+    .nav-link.active {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      background: var(--card);
+      padding: 8px;
+      min-width: 180px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s;
+      transform: translateY(-8px);
+      border: 1px solid var(--border);
+     
+    }
+
+    .nav-item:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      
+    }
+
+    .dropdown-item:hover {
+      background: rgba(255, 77, 109, 0.1);
+      color: var(--primary);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 1rem;
+     
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 77, 109, 0.1);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Auth buttons - desktop only */
+    .auth-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-login,
+    .btn-register {
+      padding: 8px 18px;
+      font-size: 0.83rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s;
+    
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-login {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+    }
+
+    .btn-login:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: rgba(255, 77, 109, 0.05);
+    }
+
+    .btn-register {
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+    }
+
+    .btn-register:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
+    }
+
+    /* Hamburger button - visible on tablet/mobile */
+    .hamburger {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 77, 109, 0.1);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* DESKTOP (≥1025px) - Show full navbar */
+    @media (min-width: 1025px) {
+      .nav-center {
+        display: flex !important;
+      }
+
+      .auth-buttons {
+        display: flex !important;
+      }
+
+      .hamburger {
+        display: none !important;
+      }
+    }
+
+    /* TABLET & iPAD (769px - 1024px) - Only logo, 2 icons, and hamburger */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .nav-center {
+        display: none !important;
+      }
+
+      .auth-buttons {
+        display: none !important;
+      }
+
+      .hamburger {
+        display: flex !important;
+      }
+
+      #navbar {
+        padding: 0 20px;
+      }
+
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* MOBILE (≤768px) - Only logo, 2 icons, and hamburger */
+    @media (max-width: 768px) {
+      .nav-center {
+        display: none !important;
+      }
+
+      .auth-buttons {
+        display: none !important;
+      }
+
+      .hamburger {
+        display: flex !important;
+      }
+
+      #navbar {
+        padding: 0 16px;
+      }
+
+      .logo-mark {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-mark {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+      }
+
+      .logo-text {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ==================== DRAWER MENU ==================== */
+    #drawer {
+      position: fixed;
+      top: var(--nav-height);
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 380px;
+      background: var(--bg);
+      z-index: 1100;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      overflow-y: auto;
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
+      border-left: 1px solid var(--border);
+    }
+
+    #drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1050;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @media (min-width: 1025px) {
+
+      #drawer,
+      .drawer-overlay {
+        display: none;
+      }
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-close {
+      width: 44px;
+      height: 44px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+    }
+
+    .drawer-close:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .drawer-links a {
+      padding: 14px 18px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.25s;
+      border-radius: 12px;
+    }
+
+    .drawer-links a.active {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .drawer-links a:hover:not(.active) {
+      background: rgba(255, 77, 109, 0.1);
+      color: var(--primary);
+      transform: translateX(4px);
+    }
+
+    .drawer-hr {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    .drawer-sec {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 8px 0;
+    }
+
+    .drawer-toggles {
+      display: flex;
+      gap: 12px;
+      margin: 20px 0;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .dtog {
+      flex: 1;
+      padding: 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 40px;
+    }
+
+    .dtog:hover {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    /* ==================== ANIMATIONS ==================== */
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-60px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .slide-in-left {
+      animation: slideInLeft 0.8s ease forwards;
+    }
+
+    .slide-in-right {
+      animation: slideInRight 0.8s ease forwards;
+    }
+
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* ==================== MAIN CONTENT ==================== */
+    .register-main {
+      min-height: 100vh;
+      padding-top: 100px;
+      padding-bottom: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .register-grid {
+      display: grid;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Desktop 2 columns */
+    @media (min-width: 1025px) {
+      .register-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+    }
+
+    /* Tablet 2 columns */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .register-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      .register-main {
+        padding-top: 90px;
+        padding-bottom: 60px;
+      }
+    }
+
+    /* Mobile 1 column */
+    @media (max-width: 768px) {
+      .register-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .register-main {
+        padding-top: 90px;
+        padding-bottom: 50px;
+      }
+
+      .register-grid {
+        padding: 0 16px;
+      }
+    }
+
+    .left-image-container {
+      opacity: 0;
+    }
+
+    .right-form-container {
+      opacity: 0;
+    }
+
+    .register-form-card {
+      background: var(--card);
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      padding: 40px;
+    }
+
+    @media (max-width: 480px) {
+      .register-form-card {
+        padding: 28px 20px;
+      }
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 14px 14px 44px;
+      border-radius: 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.1);
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 0.7rem;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.85rem;
+    }
+
+    .social-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-hover-animate {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    .btn-hover-animate::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+      z-index: -1;
+    }
+
+    .btn-hover-animate:hover::before {
+      left: 100%;
+    }
+
+    .btn-hover-animate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar">
+    <div class="nav-inner">
+      <div class="logo" id="logoHome">
+        <div class="logo-mark"><i class="bi bi-broadcast-pin"></i></div>
+        <span class="logo-text">WaveKind FM</span>
+      </div>
+
+      <!-- Desktop Navigation Links -->
+      <div class="nav-center">
+        <div class="nav-item"><button class="nav-link">Home</button>
+          <div class="dropdown-menu"><a href="Home.html" class="dropdown-item"><i class="bi bi-house"></i> Home 1</a><a
+              href="Home2.html" class="dropdown-item"><i class="bi bi-house-heart"></i> Home 2</a></div>
+        </div>
+        <a href="AboutPage.html" class="nav-link">About</a>
+        <a href="ShowsPage.html" class="nav-link">Shows</a>
+        <a href="Podcasts.html" class="nav-link">Podcasts</a>
+        <a href="Live.html" class="nav-link">Live</a>
+        <a href="Contact.html" class="nav-link">Contact</a>
+        <div class="nav-item"><button class="nav-link">Dashboard</button>
+          <div class="dropdown-menu"><a href="DashBoard/User/UserPage.html" class="dropdown-item"><i
+                class="bi bi-person"></i> User</a><a href="DashBoard/Admin/AdminPage.html" class="dropdown-item"><i
+                class="bi bi-shield-lock"></i> Admin</a></div>
+        </div>
+      </div>
+
+      <!-- Right side icons -->
+      <div class="nav-right">
+        <button class="icon-btn" id="themeToggle"><i class="bi bi-moon-fill" id="themeIcon"></i></button>
+        <button class="icon-btn" id="rtlToggle"><i class="bi bi-arrow-left-right"></i></button>
+        <div class="auth-buttons"><a href="Login.html" class="btn-login"><i class="bi bi-box-arrow-in-right"></i>
+            Login</a><a href="Register.html" class="btn-register"><i class="bi bi-person-plus-fill"></i> Register</a>
+        </div>
+        <button class="hamburger" id="hamburgerBtn"><i class="bi bi-list"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWER MENU -->
+  <div id="drawer">
+    <div class="drawer-header">
+      <div class="logo">
+        <div class="logo-mark"><i class="bi bi-broadcast-pin"></i></div><span class="logo-text">WaveKind FM</span>
+      </div>
+      <button class="drawer-close" id="closeDrawerBtn"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="drawer-links">
+      <a href="Home.html"><i class="bi bi-house-door"></i> Home 1</a>
+      <a href="Home2.html"><i class="bi bi-house-heart"></i> Home 2</a>
+      <a href="AboutPage.html"><i class="bi bi-info-circle"></i> About</a>
+      <a href="ShowsPage.html"><i class="bi bi-mic-fill"></i> Shows</a>
+      <a href="Podcasts.html"><i class="bi bi-headphones"></i> Podcasts</a>
+      <a href="Live.html"><i class="bi bi-broadcast"></i> Live</a>
+      <a href="Contact.html"><i class="bi bi-envelope"></i> Contact</a>
+      <div class="drawer-hr"></div>
+      <div class="drawer-sec">Dashboard</div>
+      <a href="DashBoard/User/UserPage.html"><i class="bi bi-person-circle"></i> User Panel</a>
+      <a href="DashBoard/Admin/AdminPage.html"><i class="bi bi-shield-lock"></i> Admin Panel</a>
+      <div class="drawer-hr"></div>
+      <div class="drawer-sec">Account</div>
+      <a href="Login.html"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+      <a href="Register.html"><i class="bi bi-person-plus-fill"></i> Register</a>
+    </div>
+    <div class="drawer-toggles">
+      <button class="dtog" id="drawerThemeBtn"><i class="bi bi-moon-fill"></i> <span
+          id="dThemeLabel">Dark</span></button>
+      <button class="dtog" id="drawerRtlBtn"><i class="bi bi-arrow-left-right"></i> <span
+          id="dRtlLabel">LTR</span></button>
+    </div>
+  </div>
+  <div id="drawerOverlay" class="drawer-overlay"></div>
+
+  <!-- MAIN CONTENT - REGISTRATION -->
+  <main class="register-main">
+    <div class="register-grid">
+
+      <!-- Left Side - Creative Image & Content -->
+      <div class="left-image-container" id="leftSide">
+        <div
+          style="position: relative; border-radius: 28px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); height: 100%; min-height: 580px;">
+          <div
+            style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,77,109,0.4), rgba(99,102,241,0.35)); z-index: 1;">
+          </div>
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format"
+            alt="Music Studio" style="width: 100%; height: 100%; min-height: 580px; object-fit: cover;">
+          <div
+            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 36px; background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.4), transparent); z-index: 2;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+              <div
+                style="width: 52px; height: 52px; border-radius: 16px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-mic-fill" style="color: white; font-size: 1.6rem;"></i></div>
+              <span
+                style="color: rgba(255,255,255,0.9); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Join
+                The Community</span>
+            </div>
+            <h3
+              style="color: white; font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; font-family: 'Bebas Neue', sans-serif;">
+              Start Your<br>Musical Journey</h3>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.875rem; line-height: 1.6; margin-bottom: 24px;">Create
+              an account to access exclusive content, personalized playlists, and connect with artists.</p>
+            <div class="stats-grid">
+              <div style="text-align: center;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 4px;">
+                  <i class="bi bi-music-note-beamed" style="color: var(--primary); font-size: 1.25rem;"></i><span
+                    style="color: white; font-size: 1.25rem; font-weight: 700;">500+</span></div>
+                <div style="color: rgba(255,255,255,0.6); font-size: 0.7rem;">Songs</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 4px;">
+                  <i class="bi bi-headphones" style="color: var(--primary); font-size: 1.25rem;"></i><span
+                    style="color: white; font-size: 1.25rem; font-weight: 700;">100+</span></div>
+                <div style="color: rgba(255,255,255,0.6); font-size: 0.7rem;">Artists</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 4px;">
+                  <i class="bi bi-chat-dots" style="color: var(--primary); font-size: 1.25rem;"></i><span
+                    style="color: white; font-size: 1.25rem; font-weight: 700;">24/7</span></div>
+                <div style="color: rgba(255,255,255,0.6); font-size: 0.7rem;">Live Chat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side - Registration Form -->
+      <div class="right-form-container" id="rightSide">
+        <div class="register-form-card float-animation">
+          <div style="text-align: center; margin-bottom: 28px;">
+            <div
+              style="display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; border-radius: 20px; background: var(--gradient-primary); box-shadow: 0 8px 20px rgba(255,77,109,0.3); margin-bottom: 20px;">
+              <i class="bi bi-person-plus-fill" style="color: white; font-size: 2rem;"></i></div>
+            <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--text); margin-bottom: 8px;">Create Account</h2>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">Join <span
+                style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 600;">WaveKind
+                FM</span> and start listening</p>
+          </div>
+
+          <form id="registerForm" style="display: flex; flex-direction: column; gap: 18px;">
+            <div><label for="fullname"
+                style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 8px;"><i
+                  class="bi bi-person-fill" style="margin-right: 8px; color: var(--primary);"></i>Full Name</label>
+              <div style="position: relative;">
+                <div style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);"><i
+                    class="bi bi-person" style="color: var(--text-muted);"></i></div><input type="text" id="fullname"
+                  name="fullname" required class="form-input" placeholder="John Doe">
+              </div>
+              <div class="error-message" id="fullnameError">Please enter your full name</div>
+            </div>
+            <div><label for="email"
+                style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 8px;"><i
+                  class="bi bi-envelope-fill" style="margin-right: 8px; color: var(--primary);"></i>Email
+                Address</label>
+              <div style="position: relative;">
+                <div style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);"><i
+                    class="bi bi-envelope" style="color: var(--text-muted);"></i></div><input type="email" id="email"
+                  name="email" required class="form-input" placeholder="your@email.com">
+              </div>
+              <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+            <div><label for="password"
+                style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 8px;"><i
+                  class="bi bi-lock-fill" style="margin-right: 8px; color: var(--primary);"></i>Password</label>
+              <div style="position: relative;">
+                <div style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);"><i class="bi bi-key"
+                    style="color: var(--text-muted);"></i></div><input type="password" id="password" name="password"
+                  required class="form-input" style="padding-right: 45px;"
+                  placeholder="Create a strong password"><button type="button" id="togglePassword"
+                  style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted);"><i
+                    class="bi bi-eye-slash"></i></button>
+              </div>
+              <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
+            </div>
+            <div><label for="confirmPassword"
+                style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 8px;"><i
+                  class="bi bi-shield-lock-fill" style="margin-right: 8px; color: var(--primary);"></i>Confirm
+                Password</label>
+              <div style="position: relative;">
+                <div style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);"><i
+                    class="bi bi-check-circle" style="color: var(--text-muted);"></i></div><input type="password"
+                  id="confirmPassword" name="confirmPassword" required class="form-input" style="padding-right: 45px;"
+                  placeholder="Confirm your password"><button type="button" id="toggleConfirmPassword"
+                  style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted);"><i
+                    class="bi bi-eye-slash"></i></button>
+              </div>
+              <div class="error-message" id="confirmError">Passwords do not match</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; margin-top: 8px;"><input type="checkbox"
+                id="termsCheckbox"
+                style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);"><label
+                for="termsCheckbox" style="font-size: 0.75rem; color: var(--text-secondary); cursor: pointer;">I agree
+                to the <a href="#" id="termsLink" style="color: var(--primary); text-decoration: none;">Terms of
+                  Service</a> and <a href="#" id="privacyLink"
+                  style="color: var(--primary); text-decoration: none;">Privacy Policy</a></label></div>
+            <div class="error-message" id="termsError">Please accept the terms and conditions</div>
+            <button type="submit" id="registerBtn" class="btn-hover-animate"
+              style="width: 100%; padding: 14px; border-radius: 40px; background: var(--gradient-primary); color: white; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px;"><i
+                class="bi bi-person-plus-fill" style="font-size: 1.1rem;"></i><span>Create Account</span></button>
+          </form>
+
+          <div style="position: relative; margin: 28px 0 20px;">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center;">
+              <div style="width: 100%; border-top: 1px solid var(--border);"></div>
+            </div>
+            <div style="position: relative; display: flex; justify-content: center; font-size: 0.875rem;"><span
+                style="padding: 0 12px; background: var(--card); color: var(--text-muted); display: flex; align-items: center; gap: 8px;"><i
+                  class="bi bi-three-dots"></i>Or sign up with</span></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;"><button class="social-btn"><i
+                class="bi bi-google" style="color: #ea4335;"></i><span
+                style="font-size: 0.875rem;">Google</span></button><button class="social-btn"><i
+                class="bi bi-apple"></i><span style="font-size: 0.875rem;">Apple</span></button></div>
+          <p
+            style="text-align: center; font-size: 0.875rem; color: var(--text-secondary); margin-top: 24px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            <i class="bi bi-box-arrow-in-right" style="color: var(--primary);"></i>Already have an account?<a
+              href="login.html" id="loginLink"
+              style="color: var(--primary); font-weight: 600; text-decoration: none;">Sign In</a></p>
+          <div
+            style="margin-top: 20px; text-align: center; background: rgba(255,77,109,0.05); padding: 12px; border-radius: 16px;">
+            <p
+              style="font-size: 0.7rem; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 6px;">
+              <i class="bi bi-info-circle-fill" style="color: var(--primary);"></i><span>Create your free account to
+                start listening</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Theme Toggle
+    let isDark = localStorage.getItem('theme') === 'dark';
+    function applyTheme() {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      const themeIcon = document.getElementById('themeIcon');
+      const drawerIcon = document.querySelector('#drawerThemeBtn i');
+      const drawerSpan = document.getElementById('dThemeLabel');
+      if (themeIcon) themeIcon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+      if (drawerIcon) drawerIcon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+      if (drawerSpan) drawerSpan.textContent = isDark ? 'Light' : 'Dark';
+    }
+    applyTheme();
+    function toggleTheme() { isDark = !isDark; localStorage.setItem('theme', isDark ? 'dark' : 'light'); applyTheme(); }
+    document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+    document.getElementById('drawerThemeBtn')?.addEventListener('click', toggleTheme);
+
+    // RTL Toggle
+    let isRTL = localStorage.getItem('dir') === 'rtl';
+    function applyRTL() { document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr'); const rs = document.getElementById('dRtlLabel'); if (rs) rs.textContent = isRTL ? 'LTR' : 'RTL'; }
+    applyRTL();
+    function toggleRTL() { isRTL = !isRTL; localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr'); applyRTL(); }
+    document.getElementById('rtlToggle')?.addEventListener('click', toggleRTL);
+    document.getElementById('drawerRtlBtn')?.addEventListener('click', toggleRTL);
+
+    // Drawer Controls
+    const drawer = document.getElementById('drawer'), overlay = document.getElementById('drawerOverlay');
+    function openDrawer() { drawer.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeDrawer() { drawer.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    document.getElementById('hamburgerBtn')?.addEventListener('click', openDrawer);
+    document.getElementById('closeDrawerBtn')?.addEventListener('click', closeDrawer);
+    overlay?.addEventListener('click', closeDrawer);
+    document.querySelectorAll('.drawer-links a').forEach(l => l.addEventListener('click', closeDrawer));
+
+    // Logo click
+    document.getElementById('logoHome')?.addEventListener('click', () => { window.location.href = 'index.html'; });
+
+    // Toggle Password
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    let passwordVisible = false;
+    if (togglePassword) togglePassword.addEventListener('click', () => { passwordVisible = !passwordVisible; passwordInput.type = passwordVisible ? 'text' : 'password'; togglePassword.innerHTML = passwordVisible ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>'; });
+    const toggleConfirm = document.getElementById('toggleConfirmPassword');
+    const confirmInput = document.getElementById('confirmPassword');
+    let confirmVisible = false;
+    if (toggleConfirm) toggleConfirm.addEventListener('click', () => { confirmVisible = !confirmVisible; confirmInput.type = confirmVisible ? 'text' : 'password'; toggleConfirm.innerHTML = confirmVisible ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>'; });
+
+    // Validation
+    function validateFullname() { const val = document.getElementById('fullname').value.trim(); const err = document.getElementById('fullnameError'); if (!val) { err.classList.add('show'); return false; } err.classList.remove('show'); return true; }
+    function validateEmail() { const email = document.getElementById('email').value.trim(); const err = document.getElementById('emailError'); const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; if (!email || !regex.test(email)) { err.classList.add('show'); return false; } err.classList.remove('show'); return true; }
+    function validatePassword() { const pass = document.getElementById('password').value; const err = document.getElementById('passwordError'); if (!pass || pass.length < 6) { err.classList.add('show'); return false; } err.classList.remove('show'); return true; }
+    function validateConfirm() { const pass = document.getElementById('password').value; const confirm = document.getElementById('confirmPassword').value; const err = document.getElementById('confirmError'); if (!confirm || pass !== confirm) { err.classList.add('show'); return false; } err.classList.remove('show'); return true; }
+    function validateTerms() { const terms = document.getElementById('termsCheckbox').checked; const err = document.getElementById('termsError'); if (!terms) { err.classList.add('show'); return false; } err.classList.remove('show'); return true; }
+
+    document.getElementById('fullname')?.addEventListener('input', validateFullname);
+    document.getElementById('email')?.addEventListener('input', validateEmail);
+    document.getElementById('password')?.addEventListener('input', validatePassword);
+    document.getElementById('confirmPassword')?.addEventListener('input', validateConfirm);
+    document.getElementById('termsCheckbox')?.addEventListener('change', validateTerms);
+
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.style.cssText = `position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : 'var(--gradient-primary)'}; color: white; padding: 12px 24px; border-radius: 60px; z-index: 9999; display: flex; align-items: center; gap: 12px; font-weight: 500; box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: slideDown 0.5s ease;`;
+      toast.innerHTML = `<i class="bi ${type === 'success' ? 'bi-check-circle-fill' : type === 'error' ? 'bi-x-circle-fill' : 'bi-info-circle-fill'}"></i><span>${message}</span>`;
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(-20px)'; toast.style.transition = 'all 0.5s ease'; setTimeout(() => toast.remove(), 500); }, 3000);
+    }
+
+    // Form Submit
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (validateFullname() && validateEmail() && validatePassword() && validateConfirm() && validateTerms()) {
+        const btn = document.getElementById('registerBtn');
+        btn.disabled = true; btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Creating Account...';
+        setTimeout(() => { showToast('🎉 Account created successfully! Welcome to WaveKind FM!', 'success'); btn.innerHTML = '<i class="bi bi-check-circle"></i> Success!'; setTimeout(() => { window.location.href = 'login.html'; }, 1500); }, 1000);
+      } else { showToast('Please fix the errors above', 'error'); }
+    });
+
+    document.getElementById('termsLink')?.addEventListener('click', (e) => { e.preventDefault(); showToast('📜 View Terms of Service', 'info'); });
+    document.getElementById('privacyLink')?.addEventListener('click', (e) => { e.preventDefault(); showToast('🔒 View Privacy Policy', 'info'); });
+    document.getElementById('loginLink')?.addEventListener('click', (e) => { e.preventDefault(); showToast('Redirecting to login page...', 'info'); setTimeout(() => { window.location.href = 'login.html'; }, 500); });
+    document.querySelectorAll('.social-btn').forEach(btn => btn.addEventListener('click', () => { showToast('🔐 Social sign up coming soon!', 'info'); }));
+
+    // Animations on load
+    setTimeout(() => {
+      const leftSide = document.getElementById('leftSide'); const rightSide = document.getElementById('rightSide');
+      if (leftSide) { leftSide.classList.add('slide-in-left'); leftSide.style.opacity = '1'; }
+      if (rightSide) { rightSide.classList.add('slide-in-right'); rightSide.style.opacity = '1'; }
+    }, 100);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>WaveKind FM — About Us | Our Story & Mission</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --primary: #ff4d6d;
+            --primary-dark: #e63946;
+            --secondary: #6366f1;
+            --secondary-dark: #4f46e5;
+            --bg: #ffffff;
+            --bg2: #f8fafc;
+            --bg3: #f1f5f9;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --nav-bg: rgba(255, 255, 255, 0.98);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --gradient-primary: linear-gradient(135deg, #ff4d6d, #e63946);
+            --gradient-secondary: linear-gradient(135deg, #6366f1, #4f46e5);
+            --gradient-wave: linear-gradient(120deg, #ff4d6d, #f97316, #eab308);
+            --nav-height: 70px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --bg2: #1e293b;
+            --bg3: #334155;
+            --card: #1e293b;
+            --border: #334155;
+            --text: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --nav-bg: rgba(15, 23, 42, 0.98);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* ==================== NAVBAR ==================== */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+           
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-drop {
+            position: relative;
+        }
+
+        .nav-link,
+        .drop-btn {
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            
+        }
+
+        .nav-link:hover,
+        .drop-btn:hover {
+            background: rgba(255, 77, 109, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 45px;
+            left: 0;
+            background: var(--card);
+            padding: 8px;
+            min-width: 180px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s;
+            transform: translateY(-8px);
+            border: 1px solid var(--border);
+            
+        }
+
+        .nav-drop:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 77, 109, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-size: 1.1rem;
+            
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 77, 109, 0.1);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-login,
+        .btn-register {
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s;
+            
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-login {
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-login:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: rgba(255, 77, 109, 0.05);
+        }
+
+        .btn-register {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
+        }
+
+        .hamburger {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .hamburger:hover {
+            background: rgba(255, 77, 109, 0.1);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* FIXED: Tablet (769px-1024px) - Show hamburger ONLY, hide nav links */
+        @media (min-width: 769px) and (max-width: 1024px) {
+
+            .nav-links,
+            .auth-buttons,
+            .icon-btn {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex !important;
+            }
+
+            #navbar {
+                padding: 0 20px;
+            }
+
+            .logo-mark {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Desktop (≥1025px) - Full navbar visible */
+        @media (min-width: 1025px) {
+            .nav-links {
+                display: flex !important;
+            }
+
+            .auth-buttons {
+                display: flex !important;
+            }
+
+            .icon-btn {
+                display: inline-flex !important;
+            }
+
+            .hamburger {
+                display: none !important;
+            }
+        }
+
+        /* Mobile (≤768px) - Hamburger visible */
+        @media (max-width: 768px) {
+
+            .nav-links,
+            .auth-buttons,
+            .icon-btn {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex !important;
+            }
+
+            #navbar {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-mark {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            .logo-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* DRAWER - Opens only on click */
+        #drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 380px;
+            background: var(--bg);
+            z-index: 1100;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            overflow-y: auto;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
+            border-left: 1px solid var(--border);
+        }
+
+        #drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (min-width: 1025px) {
+
+            #drawer,
+            .drawer-overlay {
+                display: none;
+            }
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .drawer-close {
+            width: 44px;
+            height: 44px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .drawer-close:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .drawer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .drawer-links a {
+            padding: 14px 18px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .drawer-links a.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .drawer-links a:hover {
+            transform: translateX(4px);
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .drawer-hr {
+            height: 1px;
+            background: var(--border);
+            margin: 16px 0;
+        }
+
+        .drawer-sec {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 8px 0;
+        }
+
+        .drawer-toggles {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .dtog {
+            flex: 1;
+            padding: 12px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 40px;
+        }
+
+        .dtog:hover {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        /* ==================== CONTAINER ==================== */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== HERO STYLES ==================== */
+        .hero-about {
+            min-height: 85vh;
+            padding-top: 100px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--bg), var(--bg2));
+            overflow: hidden;
+        }
+
+        .hero-about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 77, 109, 0.12), transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content-new {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-left h6 {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-left h1 {
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: var(--gradient-wave);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-left p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 90%;
+        }
+
+        .hero-stats-new {
+            display: flex;
+            gap: 32px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-new .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-new .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .hero-right {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-right img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .hero-right:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-badge-card {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 16px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content-new {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-left p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-stats-new {
+                justify-content: center;
+            }
+
+            .hero-right img {
+                height: 320px;
+            }
+        }
+
+        /* ==================== MISSION CARDS ==================== */
+        .mission-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .mission-modern-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 36px 28px;
+            transition: all 0.3s;
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .mission-modern-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .mission-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-primary);
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+        }
+
+        .mission-icon i {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .mission-modern-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .mission-modern-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .mission-grid-modern {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mission-grid-modern {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== TEAM SECTION ==================== */
+        .sec-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .sec-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .sec-label::before,
+        .sec-label::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-primary);
+        }
+
+        .sec-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+
+        .team-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+        }
+
+        .team-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .team-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .team-info .role {
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-info .bio {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .social-links-team {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .social-links-team a {
+            width: 32px;
+            height: 32px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .social-links-team a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        @media (max-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== STATS SECTION ==================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .stat-box {
+            background: var(--gradient-primary);
+            padding: 36px 20px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s;
+            border-radius: 20px;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .stat-box .val {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .stat-box .lbl {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== CTA SECTION ==================== */
+        .cta-section {
+            background: var(--gradient-primary);
+            padding: 60px 48px;
+            text-align: center;
+            border-radius: 24px;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 550px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            background: white;
+            color: var(--primary);
+            font-weight: 700;
+            border-radius: 40px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ==================== FOOTER (Fully Responsive) ==================== */
+        footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 64px 0 32px;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        @media (min-width: 1200px) {
+            .footer-grid {
+                grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+                gap: 48px;
+            }
+
+            .footer-brand,
+            .footer-links,
+            .footer-contact {
+                text-align: left;
+            }
+
+            .footer-brand .logo {
+                justify-content: flex-start;
+                margin: 0;
+                display: inline-flex;
+            }
+
+            .footer-brand p {
+                text-align: left;
+                margin-left: 0;
+                margin-right: 0;
+                max-width: 280px;
+            }
+
+            .social-links-footer {
+                justify-content: flex-start;
+            }
+
+            .footer-links ul li a {
+                justify-content: flex-start;
+            }
+
+            .footer-contact .contact-item {
+                justify-content: flex-start;
+            }
+
+            .footer-links h4,
+            .footer-contact h4 {
+                text-align: left;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1199px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 48px 32px;
+            }
+
+            .footer-brand,
+            .footer-links,
+            .footer-contact {
+                text-align: center;
+            }
+
+            .footer-brand .logo {
+                justify-content: center;
+                margin: 0 auto;
+                display: inline-flex;
+            }
+
+            .footer-brand p {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 100%;
+            }
+
+            .social-links-footer {
+                justify-content: center;
+            }
+
+            .footer-links ul li a {
+                justify-content: center;
+            }
+
+            .footer-contact .contact-item {
+                justify-content: center;
+            }
+
+            .footer-links h4,
+            .footer-contact h4 {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-brand,
+            .footer-links,
+            .footer-contact {
+                text-align: center;
+            }
+
+            .footer-brand .logo {
+                justify-content: center;
+                margin: 0 auto;
+                display: inline-flex;
+            }
+
+            .footer-brand p {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 100%;
+            }
+
+            .social-links-footer {
+                justify-content: center;
+            }
+
+            .footer-links ul li a {
+                justify-content: center;
+            }
+
+            .footer-contact .contact-item {
+                justify-content: center;
+            }
+
+            .footer-links h4,
+            .footer-contact h4 {
+                text-align: center;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .cta-section {
+                padding: 40px 24px;
+            }
+
+            .cta-section h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            footer {
+                padding: 40px 0 20px;
+            }
+
+            .footer-grid {
+                gap: 28px;
+            }
+
+            .footer-brand p {
+                font-size: 0.8rem;
+            }
+
+            .social-link {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            .footer-links h4,
+            .footer-contact h4 {
+                font-size: 0.75rem;
+                margin-bottom: 16px;
+            }
+
+            .footer-links a {
+                font-size: 0.8rem;
+            }
+
+            .footer-contact .contact-item {
+                font-size: 0.8rem;
+            }
+
+            .footer-contact .contact-item i {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
+
+            .footer-bottom {
+                font-size: 0.7rem;
+                padding-top: 16px;
+            }
+        }
+
+        .footer-brand .logo {
+            display: inline-flex;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: 16px 0 20px;
+        }
+
+        .since-badge {
+            display: inline-block;
+            background: rgba(255, 77, 109, 0.1);
+            border: 1px solid var(--primary);
+            padding: 6px 16px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--primary);
+            border-radius: 30px;
+        }
+
+        .social-links-footer {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-links h4,
+        .footer-contact h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .footer-contact .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .footer-contact .contact-item i {
+            width: 32px;
+            height: 32px;
+            background: var(--bg3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar">
+        <div class="nav-inner">
+            <a href="404Page.html" class="logo" id="logoHome">
+                <div class="logo-mark"><i class="bi bi-broadcast-pin"></i></div>
+                <span class="logo-text">WaveKind FM</span>
+            </a>
+            <div class="nav-links">
+                <div class="nav-drop"><button class="drop-btn">Home</button>
+                    <div class="dropdown-menu"><a href="Home.html" class="dropdown-item"><i class="bi bi-house"></i> Home
+                            1</a><a href="Home2.html" class="dropdown-item"><i class="bi bi-house-heart"></i> Home 2</a></div>
+                </div>
+                <a href="AboutPage.html" class="nav-link active">About</a>
+                <a href="ShowsPage.html" class="nav-link">Shows</a>
+                <a href="Podcasts.html" class="nav-link">Podcasts</a>
+                <a href="Live.html" class="nav-link">Live</a>
+                <a href="Contact.html" class="nav-link">Contact</a>
+                <div class="nav-drop"><button class="drop-btn">Dashboard</button>
+                    <div class="dropdown-menu"><a href="DashBoard/User/UserPage.html" class="dropdown-item"><i class="bi bi-person"></i> User</a><a
+                            href="DashBoard/Admin/AdminPage.html" class="dropdown-item"><i class="bi bi-shield-lock"></i> Admin</a></div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="icon-btn" id="themeToggle"><i class="bi bi-moon-fill" id="themeIcon"></i></button>
+                <button class="icon-btn" id="rtlToggle"><i class="bi bi-arrow-left-right"></i></button>
+                <div class="auth-buttons"><a href="Login.html" class="btn-login"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a><a href="RegisterPage.html" class="btn-register"><i class="bi bi-person-plus-fill"></i> Register</a>
+                </div>
+            </div>
+            <button class="hamburger" id="hamburgerBtn"><i class="bi bi-list"></i></button>
+        </div>
+    </div>
+
+    <!-- DRAWER -->
+    <div id="drawerOverlay" class="drawer-overlay"></div>
+    <div id="drawer">
+        <div class="drawer-header">
+            <div class="logo">
+                <div class="logo-mark"><i class="bi bi-broadcast-pin"></i></div><span class="logo-text">WaveKind
+                    FM</span>
+            </div>
+            <button class="drawer-close" id="closeDrawerBtn"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="drawer-links">
+            <a href="Home.html"><i class="bi bi-house-door"></i> Home 1</a>
+            <a href="Home2.html"><i class="bi bi-house-heart"></i> Home 2</a>
+            <a href="AboutPage.html" class="active"><i class="bi bi-info-circle"></i> About</a>
+            <a href="ShowsPage.html"><i class="bi bi-mic"></i> Shows</a>
+            <a href="Podcasts.html"><i class="bi bi-headphones"></i> Podcasts</a>
+            <a href="Live.html"><i class="bi bi-broadcast"></i> Live</a>
+            <a href="Contact.html"><i class="bi bi-envelope"></i> Contact</a>
+            <div class="drawer-hr"></div>
+            <div class="drawer-sec">Dashboard</div>
+            <a href="DashBoard/User/UserPage.html"><i class="bi bi-person"></i> User Panel</a>
+            <a href="DashBoard/Admin/AdminPage.html"><i class="bi bi-shield-lock"></i> Admin Panel</a>
+            <div class="drawer-hr"></div>
+            <div class="drawer-sec">Account</div>
+            <a href="Login.html"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+            <a href="RegisterPage.html"><i class="bi bi-person-plus-fill"></i> Register</a>
+        </div>
+        <div class="drawer-toggles">
+            <button class="dtog" id="drawerThemeBtn"><i class="bi bi-moon-fill"></i> <span
+                    id="dThemeLabel">Dark</span></button>
+            <button class="dtog" id="drawerRtlBtn"><i class="bi bi-arrow-left-right"></i> <span
+                    id="dRtlLabel">LTR</span></button>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero-about">
+        <div class="container">
+            <div class="hero-content-new fade-up">
+                <div class="hero-left">
+                    <h6>✦ EST. 2020 ✦</h6>
+                    <h1>Where sound<br>becomes <span
+                            style="background:var(--gradient-wave);-webkit-background-clip:text;background-clip:text;color:transparent;">connection</span>
+                    </h1>
+                    <p>WaveKind FM isn't just a radio station — it's a global community of music lovers, storytellers,
+                        and creators. We broadcast passion 24/7, bringing you curated sounds and authentic
+                        conversations.</p>
+                    <div class="hero-stats-new">
+                        <div class="stat-new">
+                            <div class="number">68K+</div>
+                            <div class="label">Daily Listeners</div>
+                        </div>
+                        <div class="stat-new">
+                            <div class="number">200+</div>
+                            <div class="label">Live Shows</div>
+                        </div>
+                        <div class="stat-new">
+                            <div class="number">85+</div>
+                            <div class="label">Countries</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <img src="Assets/Images/ShowsBg.avif"
+                        alt="Studio Session"
+                        onerror="this.src='https://placehold.co/600x400/ff4d6d/white?text=WaveKind+Studio'">
+                    <div class="hero-badge-card"><i class="bi bi-mic-fill" style="color:var(--primary);"></i><span>Live
+                            from Bangalore — Streaming Worldwide</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION SECTION -->
+    <section class="section" style="background: var(--bg2);">
+        <div class="container">
+            <div class="mission-grid-modern">
+                <div class="mission-modern-card fade-up">
+                    <div class="mission-icon"><i class="bi bi-music-note-beamed"></i></div>
+                    <h3>Authentic Sound</h3>
+                    <p>We celebrate raw talent, emerging artists, and timeless classics — every genre finds its home.
+                    </p>
+                </div>
+                <div class="mission-modern-card fade-up">
+                    <div class="mission-icon"><i class="bi bi-people-fill"></i></div>
+                    <h3>Community First</h3>
+                    <p>Listeners become family. Interactive shows, live chats, and local stories that unite us.</p>
+                </div>
+                <div class="mission-modern-card fade-up">
+                    <div class="mission-icon"><i class="bi bi-globe2"></i></div>
+                    <h3>Global Reach</h3>
+                    <p>From Bangalore to Berlin, we connect cultures through the universal language of music.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="sec-header fade-up">
+                <div class="sec-label">Meet The Voices</div>
+                <h2 class="sec-title">The Heartbeat of WaveKind</h2>
+                <p class="sec-sub" style="color:var(--text-muted);">Passionate creators, DJs, and audio engineers
+                    dedicated to your experience.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card fade-up"><img src="Assets/Images/Aboutimg1.jpg"
+                        class="team-img" alt="Marcus">
+                    <div class="team-info">
+                        <h4>Marcus Chen</h4>
+                        <div class="role">Founder & Creative Director</div>
+                        <p class="bio">20+ years in radio, obsessed with sound discovery.</p>
+                        <div class="social-links-team"><a href="#"><i class="bi bi-instagram"></i></a><a href="#"><i
+                                    class="bi bi-linkedin"></i></a></div>
+                    </div>
+                </div>
+                <div class="team-card fade-up"><img src="Assets/Images/Aboutimg2.jpg"
+                        class="team-img" alt="Sarah">
+                    <div class="team-info">
+                        <h4>Sarah Williams</h4>
+                        <div class="role">Head of Programming</div>
+                        <p class="bio">Curating the perfect playlist for every moment.</p>
+                        <div class="social-links-team"><a href="#"><i class="bi bi-instagram"></i></a><a href="#"><i
+                                    class="bi bi-twitter-x"></i></a></div>
+                    </div>
+                </div>
+                <div class="team-card fade-up"><img src="Assets/Images/Aboutimg3.jpg"
+                        class="team-img" alt="David">
+                    <div class="team-info">
+                        <h4>David Rodriguez</h4>
+                        <div class="role">Lead Audio Engineer</div>
+                        <p class="bio">Making every sound crystal clear since day one.</p>
+                        <div class="social-links-team"><a href="#"><i class="bi bi-instagram"></i></a><a href="#"><i
+                                    class="bi bi-github"></i></a></div>
+                    </div>
+                </div>
+                <div class="team-card fade-up"><img src="Assets/Images/Aboutimg4.jpg"
+                        class="team-img" alt="Emily">
+                    <div class="team-info">
+                        <h4>Emily Park</h4>
+                        <div class="role">Podcast Director</div>
+                        <p class="bio">Bringing compelling stories to life daily.</p>
+                        <div class="social-links-team"><a href="#"><i class="bi bi-instagram"></i></a><a href="#"><i
+                                    class="bi bi-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="section" style="background: var(--bg2);">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-box fade-up">
+                    <div class="stat-icon"><i class="bi bi-headphones"></i></div>
+                    <div class="val">68K+</div>
+                    <div class="lbl">Active Listeners</div>
+                </div>
+                <div class="stat-box fade-up">
+                    <div class="stat-icon"><i class="bi bi-mic"></i></div>
+                    <div class="val">200+</div>
+                    <div class="lbl">Weekly Shows</div>
+                </div>
+                <div class="stat-box fade-up">
+                    <div class="stat-icon"><i class="bi bi-broadcast"></i></div>
+                    <div class="val">24/7</div>
+                    <div class="lbl">Live Streaming</div>
+                </div>
+                <div class="stat-box fade-up">
+                    <div class="stat-icon"><i class="bi bi-globe"></i></div>
+                    <div class="val">85+</div>
+                    <div class="lbl">Countries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="cta-section fade-up">
+                <h2>Join The Wave Community</h2>
+                <p>Become a part of something bigger. Listen live, discover new shows, and connect with creators
+                    worldwide.</p><a href="#" class="btn-white"><i class="bi bi-headphones"></i> Start Listening Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-mark"><i class="bi bi-broadcast-pin"></i></div><span class="logo-text">WaveKind
+                            FM</span>
+                    </div>
+                    <p>Your community radio station bringing you the best in music, podcasts, and local content 24/7.
+                    </p>
+                    <div class="since-badge"><i class="bi bi-trophy"></i> Since 2020</div>
+                    <div class="social-links-footer"><a href="#" class="social-link"><i
+                                class="bi bi-instagram"></i></a><a href="#" class="social-link"><i
+                                class="bi bi-twitter-x"></i></a><a href="#" class="social-link"><i
+                                class="bi bi-youtube"></i></a><a href="#" class="social-link"><i
+                                class="bi bi-spotify"></i></a></div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="Live.html"><i class="bi bi-broadcast"></i> Live Radio</a></li>
+                        <li><a href="Podcasts.html"><i class="bi bi-headphones"></i> Podcasts</a></li>
+                        <li><a href="Shows.html"><i class="bi bi-mic"></i> Shows</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="About.html"><i class="bi bi-info-circle"></i> About Us</a></li>
+                        <li><a href="Contact.html"><i class="bi bi-envelope"></i> Contact</a></li>
+                        <li><a href="Careers.html"><i class="bi bi-briefcase"></i> Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Studio</h4>
+                    <div class="contact-item"><i class="bi bi-geo-alt-fill"></i><span>Indiranagar, Bangalore</span>
+                    </div>
+                    <div class="contact-item"><i class="bi bi-telephone-fill"></i><span>+91 11122 334410</span></div>
+                    <div class="contact-item"><i class="bi bi-envelope-fill"></i><span>hello@wavekind.com</span></div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 WaveKind FM. Made with <i class="bi bi-heart-fill" style="color:var(--primary);"></i> for
+                    music lovers worldwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            // Theme Toggle
+            let isDark = localStorage.getItem('theme') === 'dark';
+            function applyTheme() {
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                const ti = document.getElementById('themeIcon');
+                if (ti) ti.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+                const ds = document.getElementById('dThemeLabel');
+                if (ds) ds.textContent = isDark ? 'Light' : 'Dark';
+                const di = document.querySelector('#drawerThemeBtn i');
+                if (di) di.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+            }
+            applyTheme();
+            window.toggleTheme = function () {
+                isDark = !isDark;
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                applyTheme();
+            };
+            document.getElementById('themeToggle')?.addEventListener('click', window.toggleTheme);
+            document.getElementById('drawerThemeBtn')?.addEventListener('click', window.toggleTheme);
+
+            // RTL Toggle
+            let isRTL = localStorage.getItem('dir') === 'rtl';
+            function applyRTL() {
+                document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+                const rl = document.getElementById('dRtlLabel');
+                if (rl) rl.textContent = isRTL ? 'RTL' : 'LTR';
+                const dri = document.querySelector('#drawerRtlBtn i');
+                if (dri) dri.className = isRTL ? 'bi bi-arrow-right-left' : 'bi bi-arrow-left-right';
+            }
+            applyRTL();
+            window.toggleRTL = function () {
+                isRTL = !isRTL;
+                localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+                applyRTL();
+            };
+            document.getElementById('rtlToggle')?.addEventListener('click', window.toggleRTL);
+            document.getElementById('drawerRtlBtn')?.addEventListener('click', window.toggleRTL);
+
+            // Drawer functionality
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('drawerOverlay');
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+
+            if (drawer) drawer.classList.remove('open');
+            if (overlay) overlay.classList.remove('active');
+
+            function openDrawer() {
+                if (drawer) drawer.classList.add('open');
+                if (overlay) overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                if (drawer) drawer.classList.remove('open');
+                if (overlay) overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+            if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
+            if (overlay) overlay.addEventListener('click', closeDrawer);
+
+            document.querySelectorAll('#drawer a').forEach(link => {
+                link.addEventListener('click', closeDrawer);
+            });
+
+            // Logo click
+            document.getElementById('logoHome')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            });
+
+            // Scroll animations
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.08 });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        })();
+    </script>
+</body>
+
+</html>
