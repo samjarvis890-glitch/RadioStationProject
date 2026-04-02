@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>WaveKind FM — Login | Welcome Back</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #ff4d6d;
+            --primary-dark: #e63946;
+            --secondary: #6366f1;
+            --secondary-dark: #4f46e5;
+            --bg: #ffffff;
+            --bg2: #f8fafc;
+            --bg3: #f1f5f9;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --nav-bg: rgba(255, 255, 255, 0.98);
+            --gradient-primary: linear-gradient(135deg, #ff4d6d, #e63946);
+            --gradient-secondary: linear-gradient(135deg, #6366f1, #4f46e5);
+            --nav-height: 70px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --bg2: #1e293b;
+            --bg3: #334155;
+            --card: #1e293b;
+            --border: #334155;
+            --text: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --nav-bg: rgba(15, 23, 42, 0.98);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        /* ==================== NAVBAR ==================== */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            height: var(--nav-height);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+        }
+
+        /* Desktop Navigation Links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-drop {
+            position: relative;
+        }
+
+        .nav-link,
+        .drop-btn {
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover,
+        .drop-btn:hover {
+            background: rgba(255, 77, 109, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 45px;
+            left: 0;
+            background: var(--card);
+            padding: 8px;
+            min-width: 180px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s;
+            transform: translateY(-8px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .nav-drop:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            border-radius: 8px;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 77, 109, 0.1);
+            color: var(--primary);
+        }
+
+        /* Right side icons - ONLY theme and RTL (no auth buttons) */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-size: 1.1rem;
+            border-radius: 10px;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 77, 109, 0.1);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Hamburger Menu - visible only on tablet/mobile */
+        .hamburger {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .hamburger:hover {
+            background: rgba(255, 77, 109, 0.1);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* ========== RESPONSIVE NAVBAR ========== */
+        /* Desktop (≥1025px) - full navbar visible, hamburger hidden */
+        @media (min-width: 1025px) {
+            .nav-links {
+                display: flex !important;
+            }
+
+            .hamburger {
+                display: none !important;
+            }
+        }
+
+        /* Tablet (769px - 1024px) - HIDE nav links, SHOW hamburger, HIDE nav-right icons */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-links {
+                display: none !important;
+            }
+
+            .nav-right {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex !important;
+            }
+
+            #navbar {
+                padding: 0 20px;
+            }
+
+            .logo-mark {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+                border-radius: 10px;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Mobile (≤768px) - HIDE nav links, SHOW hamburger, HIDE nav-right icons */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none !important;
+            }
+
+            .nav-right {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex !important;
+            }
+
+            #navbar {
+                padding: 0 16px;
+            }
+
+            .logo-mark {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+                border-radius: 8px;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Small mobile (≤480px) */
+        @media (max-width: 480px) {
+            .logo-mark {
+                width: 30px;
+                height: 30px;
+                font-size: 0.85rem;
+            }
+
+            .logo-text {
+                font-size: 0.9rem;
+            }
+
+            .hamburger {
+                width: 38px;
+                height: 38px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ==================== DRAWER MENU ==================== */
+        #drawer {
+            position: fixed;
+            top: var(--nav-height);
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 380px;
+            background: var(--bg);
+            z-index: 1100;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            overflow-y: auto;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
+            border-left: 1px solid var(--border);
+        }
+
+        #drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (min-width: 1025px) {
+
+            #drawer,
+            .drawer-overlay {
+                display: none;
+            }
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .drawer-close {
+            width: 44px;
+            height: 44px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .drawer-close:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .drawer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .drawer-links a {
+            padding: 14px 18px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 12px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .drawer-links a.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .drawer-links a:hover {
+            transform: translateX(4px);
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .drawer-hr {
+            height: 1px;
+            background: var(--border);
+            margin: 16px 0;
+        }
+
+        .drawer-sec {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 8px 0;
+        }
+
+        .drawer-toggles {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .dtog {
+            flex: 1;
+            padding: 12px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+
+        .dtog:hover {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease forwards;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease forwards;
+        }
+
+        /* Button Hover Animation */
+        .btn-hover-animate {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .btn-hover-animate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-hover-animate:hover::before {
+            left: 100%;
+        }
+
+        .btn-hover-animate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+        }
+
+        /* Form Styles */
+        .form-input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border-radius: 12px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.1);
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (min-width: 1025px) {
+            .login-main {
+                padding: 100px 24px 80px !important;
+            }
+
+            .login-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 48px !important;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .login-main {
+                padding: 90px 24px 60px !important;
+            }
+
+            .login-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 32px !important;
+            }
+
+            .left-image-container img {
+                min-height: 450px !important;
+            }
+
+            .login-form-card {
+                padding: 36px 28px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-main {
+                padding: 90px 16px 60px !important;
+            }
+
+            .login-grid {
+                grid-template-columns: 1fr !important;
+                gap: 32px !important;
+            }
+
+            .left-image-container {
+                max-width: 100%;
+            }
+
+            .left-image-container img {
+                min-height: 380px !important;
+            }
+
+            .login-form-card {
+                padding: 32px 24px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-main {
+                padding: 80px 12px 50px !important;
+            }
+
+            .left-image-container img {
+                min-height: 300px !important;
+            }
+
+            .login-form-card {
+                padding: 28px 20px !important;
+            }
+
+            .stats-grid {
+                gap: 12px !important;
+            }
+        }
+
+        .login-main {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-grid {
+            display: grid;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .left-image-container {
+            opacity: 0;
+        }
+
+        .right-form-container {
+            opacity: 0;
+        }
+
+        .login-form-card {
+            background: var(--card);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg3);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar">
+        <div class="nav-inner">
+            <div class="logo" id="logoHome">
+                <div class="logo-mark"><i class="bi bi-broadcast-pin"></i></div>
+                <span class="logo-text">WaveKind FM</span>
+            </div>
+           
+            <div class="nav-right">
+                <button class="icon-btn" id="themeToggle">
+                    <i class="bi bi-moon-fill" id="themeIcon"></i>
+                </button>
+                <button class="icon-btn" id="rtlToggle">
+                    <i class="bi bi-arrow-left-right"></i>
+                </button>
+            </div>
+            <button class="hamburger" id="hamburgerBtn"><i class="bi bi-list"></i></button>
+        </div>
+    </div>
+
+    <!-- DRAWER MENU -->
+    <div id="drawerOverlay" class="drawer-overlay"></div>
+    <div id="drawer">
+        <div class="drawer-header">
+            <div class="logo">
+                <div class="logo-mark"><i class="bi bi-broadcast-pin"></i></div>
+                <span class="logo-text">WaveKind FM</span>
+            </div>
+            <button class="drawer-close" id="closeDrawerBtn"><i class="bi bi-x-lg"></i></button>
+        </div>
+       
+        <div class="drawer-toggles">
+            <button class="dtog" id="drawerThemeBtn"><i class="bi bi-moon-fill"></i> <span
+                    id="dThemeLabel">Dark</span></button>
+            <button class="dtog" id="drawerRtlBtn"><i class="bi bi-arrow-left-right"></i> <span
+                    id="dRtlLabel">LTR</span></button>
+        </div>
+    </div>
+
+    <!-- Main Content - Login Form -->
+    <main class="login-main">
+        <div class="login-grid">
+
+            <!-- Left Side - Image & Content -->
+            <div class="left-image-container" id="leftSide">
+                <div
+                    style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); height: 100%; min-height: 550px;">
+                    <div
+                        style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,77,109,0.4), rgba(99,102,241,0.3)); z-index: 1;">
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=2070&auto=format"
+                        alt="Music Studio" style="width: 100%; height: 100%; min-height: 550px; object-fit: cover;">
+
+                    <div
+                        style="position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.4), transparent); z-index: 2;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                            <div
+                                style="width: 48px; height: 48px; border-radius: 12px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-mic-fill" style="color: white; font-size: 1.5rem;"></i>
+                            </div>
+                            <span
+                                style="color: rgba(255,255,255,0.9); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Live
+                                Radio 24/7</span>
+                        </div>
+                        <h3 style="color: white; font-size: 1.75rem; font-weight: 700; margin-bottom: 12px;">Your
+                            Soundtrack<br>Never Stops</h3>
+                        <p
+                            style="color: rgba(255,255,255,0.8); font-size: 0.875rem; line-height: 1.6; margin-bottom: 20px;">
+                            Immerse
+                            yourself in premium audio experience with exclusive podcasts and live shows.</p>
+
+                        <div class="stats-grid">
+                            <div style="text-align: center;">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 4px;">
+                                    <i class="bi bi-headphones" style="color: var(--primary); font-size: 1.25rem;"></i>
+                                    <span style="color: white; font-size: 1.25rem; font-weight: 700;">50K+</span>
+                                </div>
+                                <div style="color: rgba(255,255,255,0.6); font-size: 0.7rem;">Listeners</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 4px;">
+                                    <i class="bi bi-podcast" style="color: var(--primary); font-size: 1.25rem;"></i>
+                                    <span style="color: white; font-size: 1.25rem; font-weight: 700;">200+</span>
+                                </div>
+                                <div style="color: rgba(255,255,255,0.6); font-size: 0.7rem;">Podcasts</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 4px;">
+                                    <i class="bi bi-broadcast" style="color: var(--primary); font-size: 1.25rem;"></i>
+                                    <span style="color: white; font-size: 1.25rem; font-weight: 700;">24/7</span>
+                                </div>
+                                <div style="color: rgba(255,255,255,0.6); font-size: 0.7rem;">Live Shows</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Login Form -->
+            <div class="right-form-container" id="rightSide">
+                <div class="login-form-card">
+
+                    <!-- Header -->
+                    <div style="text-align: center; margin-bottom: 32px;">
+                        <div
+                            style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 16px; background: var(--gradient-primary); box-shadow: 0 8px 20px rgba(255,77,109,0.3); margin-bottom: 20px;">
+                            <i class="bi bi-person-circle" style="color: white; font-size: 2rem;"></i>
+                        </div>
+                        <h2 style="font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px;">
+                            Welcome Back
+                        </h2>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">
+                            Sign in to continue to <span
+                                style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 600;">WaveKind
+                                FM</span>
+                        </p>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="loginForm" style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Email Field -->
+                        <div>
+                            <label for="email"
+                                style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 8px;">
+                                <i class="bi bi-envelope-fill" style="margin-right: 8px; color: var(--primary);"></i>
+                                Email Address
+                            </label>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">
+                                    <i class="bi bi-envelope" style="color: var(--text-muted);"></i>
+                                </div>
+                                <input type="email" id="email" name="email" required class="form-input"
+                                    placeholder="your@email.com">
+                            </div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div>
+                            <label for="password"
+                                style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 8px;">
+                                <i class="bi bi-lock-fill" style="margin-right: 8px; color: var(--primary);"></i>
+                                Password
+                            </label>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">
+                                    <i class="bi bi-key" style="color: var(--text-muted);"></i>
+                                </div>
+                                <input type="password" id="password" name="password" required class="form-input"
+                                    style="padding-right: 40px;" placeholder="••••••••">
+                                <button type="button" id="togglePassword"
+                                    style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted);">
+                                    <i class="bi bi-eye-slash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Forgot Password -->
+                        <div style="display: flex; justify-content: flex-end;">
+                            <a href="#" id="forgotLink"
+                                style="font-size: 0.75rem; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 4px;">
+                                <i class="bi bi-question-circle"></i>
+                                Forgot Password?
+                            </a>
+                        </div>
+
+                        <!-- Login Button -->
+                        <button type="submit" id="loginBtn" class="btn-hover-animate"
+                            style="width: 100%; padding: 14px; border-radius: 40px; background: var(--gradient-primary); color: white; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="bi bi-box-arrow-in-right" style="font-size: 1.1rem;"></i>
+                            <span>Sign In</span>
+                        </button>
+                    </form>
+
+                    <!-- Divider -->
+                    <div style="position: relative; margin: 28px 0 24px;">
+                        <div style="position: absolute; inset: 0; display: flex; align-items: center;">
+                            <div style="width: 100%; border-top: 1px solid var(--border);"></div>
+                        </div>
+                        <div style="position: relative; display: flex; justify-content: center; font-size: 0.875rem;">
+                            <span
+                                style="padding: 0 12px; background: var(--card); color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                                <i class="bi bi-three-dots"></i>
+                                Or continue with
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Social Login Buttons -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <button class="social-btn">
+                            <i class="bi bi-google" style="color: #ea4335;"></i>
+                            <span style="font-size: 0.875rem;">Google</span>
+                        </button>
+                        <button class="social-btn">
+                            <i class="bi bi-apple"></i>
+                            <span style="font-size: 0.875rem;">Apple</span>
+                        </button>
+                    </div>
+
+                    <!-- Sign Up Link -->
+                    <p
+                        style="text-align: center; font-size: 0.875rem; color: var(--text-secondary); margin-top: 24px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        <i class="bi bi-person-plus" style="color: var(--primary);"></i>
+                        Don't have an account?
+                        <a href="#" id="signupLink"
+                            style="color: var(--primary); font-weight: 600; text-decoration: none;">
+                            Create Account
+                        </a>
+                    </p>
+
+                    <!-- Demo Credentials -->
+                    <div
+                        style="margin-top: 20px; text-align: center; background: rgba(255,77,109,0.05); padding: 12px; border-radius: 12px;">
+                        <p
+                            style="font-size: 0.7rem; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 6px;">
+                            <i class="bi bi-info-circle-fill" style="color: var(--primary);"></i>
+                            <strong>Demo:</strong> demo@wavekind.com / password123
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Theme Toggle
+        let isDark = localStorage.getItem('theme') === 'dark';
+
+        function applyTheme() {
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            const themeIcon = document.getElementById('themeIcon');
+            const drawerIcon = document.querySelector('#drawerThemeBtn i');
+            const drawerSpan = document.getElementById('dThemeLabel');
+            if (themeIcon) themeIcon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+            if (drawerIcon) drawerIcon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+            if (drawerSpan) drawerSpan.textContent = isDark ? 'Light' : 'Dark';
+        }
+
+        applyTheme();
+
+        function toggleTheme() {
+            isDark = !isDark;
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            applyTheme();
+        }
+
+        document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+        document.getElementById('drawerThemeBtn')?.addEventListener('click', toggleTheme);
+
+        // RTL Toggle
+        let isRTL = localStorage.getItem('dir') === 'rtl';
+
+        function applyRTL() {
+            document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+            const rtlSpan = document.getElementById('dRtlLabel');
+            if (rtlSpan) rtlSpan.textContent = isRTL ? 'RTL' : 'LTR';
+        }
+
+        applyRTL();
+
+        function toggleRTL() {
+            isRTL = !isRTL;
+            localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+            applyRTL();
+        }
+
+        document.getElementById('rtlToggle')?.addEventListener('click', toggleRTL);
+        document.getElementById('drawerRtlBtn')?.addEventListener('click', toggleRTL);
+
+        // Drawer functionality
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('drawerOverlay');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+
+        if (drawer) drawer.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+
+        function openDrawer() {
+            if (drawer) drawer.classList.add('open');
+            if (overlay) overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            if (drawer) drawer.classList.remove('open');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+        if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
+        if (overlay) overlay.addEventListener('click', closeDrawer);
+
+        document.querySelectorAll('#drawer a').forEach(link => {
+            link.addEventListener('click', closeDrawer);
+        });
+
+        // Toggle Password Visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        let passwordVisible = false;
+
+        if (togglePassword) {
+            togglePassword.addEventListener('click', () => {
+                passwordVisible = !passwordVisible;
+                if (passwordVisible) {
+                    passwordInput.type = 'text';
+                    togglePassword.innerHTML = '<i class="bi bi-eye"></i>';
+                } else {
+                    passwordInput.type = 'password';
+                    togglePassword.innerHTML = '<i class="bi bi-eye-slash"></i>';
+                }
+            });
+        }
+
+        // Logo click
+        document.getElementById('logoHome')?.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        // Toast Notification
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+      position: fixed;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient-primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 60px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: slideDown 0.5s ease;
+    `;
+            toast.innerHTML = `<i class="bi ${type === 'success' ? 'bi-check-circle-fill' : type === 'error' ? 'bi-x-circle-fill' : 'bi-info-circle-fill'}"></i><span>${message}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(-20px)';
+                toast.style.transition = 'all 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // Login Form Submit
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                if (!email || !password) {
+                    showToast('Please fill in all fields', 'error');
+                    return;
+                }
+                if (!email.includes('@')) {
+                    showToast('Please enter a valid email address', 'error');
+                    return;
+                }
+
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Signing in...';
+
+                setTimeout(() => {
+                    if (email === 'demo@wavekind.com' && password === 'password123') {
+                        showToast('🎉 Welcome back! Login successful!', 'success');
+                        loginBtn.innerHTML = '<i class="bi bi-check-circle"></i> Success!';
+                        setTimeout(() => {
+                            window.location.href = 'UserDashboard.html';
+                        }, 1500);
+                    } else {
+                        showToast('❌ Invalid credentials. Try: demo@wavekind.com / password123', 'error');
+                        loginBtn.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Sign In';
+                        loginBtn.disabled = false;
+                    }
+                }, 1000);
+            });
+        }
+
+        // Forgot Password Link
+        document.getElementById('forgotLink')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast('📧 Password reset link sent to your email!', 'info');
+        });
+
+        // Sign Up Link
+        document.getElementById('signupLink')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast('🔐 Redirecting to registration page...', 'info');
+            setTimeout(() => {
+                window.location.href = 'Register.html';
+            }, 1000);
+        });
+
+        // Social Buttons
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                showToast('🔐 Social login coming soon!', 'info');
+            });
+        });
+
+        // Animations on load
+        setTimeout(() => {
+            const leftSide = document.getElementById('leftSide');
+            const rightSide = document.getElementById('rightSide');
+            if (leftSide) {
+                leftSide.classList.add('slide-in-left');
+                leftSide.style.opacity = '1';
+            }
+            if (rightSide) {
+                rightSide.classList.add('slide-in-right');
+                rightSide.style.opacity = '1';
+            }
+        }, 100);
+
+        const style = document.createElement('style');
+        style.textContent = `
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateX(-50%) translateY(-30px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+  `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
